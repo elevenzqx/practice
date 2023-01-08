@@ -1,0 +1,18 @@
+# 基于 ubuntu 镜像
+FROM centos
+LABEL author="eleven"
+
+WORKDIR /data
+
+# 未测试
+RUN yum -y update
+RUN yum install curl -y
+RUN yum install gcc -y
+RUN yum install g++ -y
+RUN yum install vim -y
+RUN yum install net-tools -y
+RUN yum install golang -y
+RUN yum install python2.7 -y
+RUN yum install python3.4 -y
+
+EXPOSE 6666                  
