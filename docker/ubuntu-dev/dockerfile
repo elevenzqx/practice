@@ -1,9 +1,17 @@
+# 基于 ubuntu 镜像
 FROM ubuntu:23.04
-COPY . . 
+LABEL author="eleven"
+
 WORKDIR /data
+
 RUN apt-get update
+RUN apt-get install curl -y
 RUN apt-get install gcc -y
 RUN apt-get install g++ -y
 RUN apt-get install vim -y
 RUN apt-get install net-tools -y
-EXPOSE 5000                  
+RUN apt-get install golang -y
+RUN apt-get install python2.7 -y
+RUN apt-get install python3.4 -y
+
+EXPOSE 6666                  
