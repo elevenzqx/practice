@@ -30,7 +30,7 @@ fn main() {
 
     rand_function();
 
-    process(Protection::Secure{ version: 520})
+    process(Protection::Secure(SecureVersion::V2_1))
 }
 
 // 需要查找 crate 仓库依赖 https://crates.io/crates/rand/versions 并添加到 Cargo 依赖文件中
@@ -50,15 +50,22 @@ fn rand_function() {
 
 // 枚举类型的使用
 pub enum Protection {
-    Secure { version: u64 },
+    Secure (SecureVersion),
     #[deprecated = "using secure mode everywhere is now strongly recommended"]
     Insecure,
 }
 
+#[derive(Debug)]
+pub enum SecureVersion {
+    V1,
+    V2,
+    V2_1,
+}
+
 fn process(prot: Protection) {
     match prot {
-        Protection::Secure { version } => {
-            println!("No hackers plz, v {version}");
+        Protection::Secure (version) => {
+            println!("No hackers plz, v: {version:?}");
         }
         // We still need to handle this case
         #[allow(deprecated)]
