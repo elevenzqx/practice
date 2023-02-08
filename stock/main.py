@@ -1,6 +1,7 @@
 import tushare as ts
 import yaml
 import os
+import mysql.connector
 
 print(ts.__version__)
 
@@ -18,6 +19,8 @@ def load_config():
 
 cfg = load_config()
 token = cfg['token']
+host = cfg['mysql']['host']
+print(host)
 globalTs = ts.pro_api(token)
 
 def read_stock():
@@ -25,6 +28,19 @@ def read_stock():
 
 def main():
     print("Hello, World!")
-    
+
+
+mydb = mysql.connector.connect(
+  host="127.0.0.1",       # 数据库主机地址
+  user="root",    # 数据库用户名
+  passwd="12345678"   # 数据库密码
+)
+mycursor = mydb.cursor()
+
+mycursor.execute("SHOW DATABASES")
+ 
+for x in mycursor:
+  print(x)
+
 if __name__== "__main__" :
     main()
