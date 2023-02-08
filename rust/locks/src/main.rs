@@ -21,7 +21,24 @@ impl State {
     }
 }
 
+struct NoisyDrop;
+
+impl Drop for NoisyDrop {
+    // drop 方法会在作用域结束后, 自动释放
+    fn drop(&mut self) {
+        println!("dropping!");
+    }
+}
+
 fn main() {
+    {
+        #[warn(unused_variables)]
+        let _nd = NoisyDrop;
+        println!("before drop...");
+        // `nd` goes out of scope and is dropped.
+    }
+    println!("after drop!");
+
     let a =1;
     let b = a;
     let c = a;
@@ -34,6 +51,7 @@ fn main() {
         s.lock().foo();
     }
     lock_test();
+    variable_test();
 }
 
 fn lock_test() {
@@ -76,4 +94,14 @@ fn couter_func() {
 
     let counter = counter.into_inner();
     println!("final count: {counter}");
+}
+
+fn variable_test() {
+    let mut x = 42;
+
+    let a = &mut x;
+    println!("a = {a}");
+
+    let b = &mut x;
+    println!("b = {b}");
 }
