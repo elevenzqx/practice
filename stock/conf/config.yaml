@@ -1,1 +1,5 @@
-token: xxxx
+token: 'xxx'
+mysql:
+  host: '172.16.58.2'
+  user: 'root'
+  passwd: '123456'
