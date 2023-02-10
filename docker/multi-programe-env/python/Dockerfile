@@ -1,4 +1,4 @@
-FROM python
+FROM python as pydev
 WORKDIR /data/
 
 RUN apt-get update \

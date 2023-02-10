@@ -2,14 +2,24 @@ services:
   python:
     build:
       context: python
-    volumes:
-      - 
     depends_on:
       - db
+    volumes:
+      - /Users/eleven/workspace:/data/workspace
     networks:                                                                       
       - "default"
     tty: true
 
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:                                                                       
+      - "default" 
+  
   # backend:
   #   build:
   #     context: backend
@@ -49,6 +59,8 @@ services:
   #     - "default"  
 volumes:
   db-data:
+  grafana-data:
+
 secrets:
   db-password:
     file: db/password.txt
