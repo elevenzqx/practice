@@ -101,6 +101,8 @@ def init_daily():
     if endDate < datetime.datetime.now():
       startDate = endDate + datetime.timedelta(days=1)
       endDate = datetime.datetime.now()
+      print(startDate)
+      print(endDate)
       read_stock(row['ts_code'], startDate.strftime("%Y%m%d"), endDate.strftime("%Y%m%d"))
       
     time.sleep(1)

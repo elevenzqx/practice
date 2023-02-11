@@ -5,7 +5,7 @@ services:
     depends_on:
       - db
     volumes:
-      - /Users/eleven/workspace:/data/workspace
+      - /d/workspace:/data/workspace
     networks:                                                                       
       - "default"
     tty: true
