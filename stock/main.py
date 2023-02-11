@@ -111,9 +111,13 @@ if not isInitDaily:
   init_daily()  
 
 def read_daily():
-  with engine.connect() as conn, conn.begin():
-    data=pd.read_sql_table("t_daily", conn)
-    print(data)
+  sql ="""
+    select * from t_daily where ts_code="000001.SZ"
+"""
+  data = pd.read_sql_query(sql, mydb)
+  print(data)
+  # with engine.connect() as conn, conn.begin():
+    # data=pd.read_sql_table("t_daily", conn)
     # data.to_csv('t_daily.csv')
 
 
