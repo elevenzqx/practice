@@ -4,6 +4,9 @@ import os
 import mysql.connector
 from sqlalchemy import create_engine
 import time
+import datetime
+from dateutil.relativedelta import relativedelta
+import pandas as pd
 
 print(ts.__version__)
 
@@ -25,11 +28,7 @@ host = cfg['mysql']['host']
 user = cfg['mysql']['user']
 passwd = cfg['mysql']['passwd']
 
-print(host)
 globalTs = ts.pro_api(token)
-  
-def main():
-  print("Hello, World!")
 
 # 检验数据库是否存在代码
 mydb = mysql.connector.connect(
@@ -53,31 +52,72 @@ def create_databases():
 if not isInit:
   create_databases()
 
+mycursor.execute("USE d_stock")
+
+mycursor.execute("SHOW TABLES")
+
+isInitBasic = False
+isInitDaily = False
+
+for x in mycursor:
+  if x[0] == 't_basic':
+    isInitBasic = True
+  if x[0] == 't_daily':
+    isInitDaily = True
+    
 # engine = create_engine('mysql+pymysql://root:12345678@localhost:3306/testdb')
 
 engine = create_engine("mysql+pymysql://{}:{}@{}:{}/{}".format(user, passwd, host, '3306', 'd_stock'))
 
 def read_basic():
   data = globalTs.query('stock_basic', exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,fullname,enname,cnspell,market,exchange,curr_type,list_status,list_date,delist_date,is_hs')
-  # data = globalTs.query('stock_basic', exchange='', list_status='L', fields='ts_code,symbol,name,area,industry,list_date')
   print(data)
-  print(data.dtypes)
   data.to_sql('t_basic', engine, index=False, if_exists='replace')
   return data
   
+if not isInitBasic:
+  read_basic()
+
 def read_stock(ts_code, start_date, end_date):
-  # df = globalTs.trade_cal(exchange='', start_date='20180901', end_date='20181001', fields='exchange,cal_date,is_open,pretrade_date', is_open='0')
   df = globalTs.daily(ts_code=ts_code, start_date=start_date, end_date=end_date)
   print(df)
   df.to_sql('t_daily', engine, index=False, if_exists='append')
   
-basic = read_basic()
-for _, row in basic.iterrows():
-  print(row['ts_code']) # 输出每行的索引值
-  print(row['list_date']) # 输出每行的索引值
-  read_stock(row['ts_code'], row['list_date'], '20180718')
-  time.sleep(5)
-# read_stock('000001.SZ', '20180701', '20180718')
+def init_daily():
+  basic = read_basic()
+  for _, row in basic.iterrows():
+    print(row['ts_code']) # 输出每行的索引值
+    print(row['list_date']) # 输出每行的索引值
+    startDate = datetime.datetime.strptime(row['list_date'], '%Y%m%d') 
+    
+    endDate = startDate + relativedelta(years=18)
+    print(startDate)
+    print(endDate)
+    
+    read_stock(row['ts_code'], startDate.strftime("%Y%m%d"), endDate.strftime("%Y%m%d"))
+    
+    time.sleep(1)
+    
+    if endDate < datetime.datetime.now():
+      startDate = endDate + datetime.timedelta(days=1)
+      endDate = datetime.datetime.now()
+      read_stock(row['ts_code'], startDate.strftime("%Y%m%d"), endDate.strftime("%Y%m%d"))
+      
+    time.sleep(1)
+    
+if not isInitDaily:
+  init_daily()  
 
-# if __name__== "__main__" :
-#   main()
+def read_daily():
+  with engine.connect() as conn, conn.begin():
+    data=pd.read_sql_table("t_daily", conn)
+    print(data)
+    # data.to_csv('t_daily.csv')
+
+
+def main():
+  read_daily()
+  print('Finished')
+  
+if __name__== "__main__" :
+  main()

@@ -14,11 +14,15 @@ services:
     image: grafana/grafana:latest
     ports:
       - 3000:3000
+    expose:
+      - 3000
     restart: unless-stopped
     volumes:
       - grafana-data:/var/lib/grafana
-    networks:                                                                       
-      - "default" 
+    networks:
+      - default
+    depends_on:
+      - db
   
   # backend:
   #   build:
@@ -49,6 +53,7 @@ services:
       - 3306
     networks:                                                                       
       - "default"  
+
   # proxy:
   #   build: proxy
   #   ports:
@@ -70,4 +75,5 @@ networks:
     driver: bridge                                                                  
     ipam:                                                                           
       config:                                                                       
-        - subnet: 172.16.58.0/24 
+        - subnet: 172.16.58.0/24                                                         
+
