@@ -8,6 +8,10 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import pandas as pd
 
+import matplotlib.pyplot as plt
+import mplfinance as mpf
+# import seaborn as sns
+
 print(ts.__version__)
 
 def load_config():
@@ -116,6 +120,33 @@ def read_daily():
 """
   data = pd.read_sql_query(sql, mydb)
   print(data)
+  
+  fig,axes = plt.subplots(2,1,sharex=True,figsize=(15,8))
+  ax1,ax2 = axes.flatten()
+  
+  df_arr = data.values
+  data = data.drop(labels=["ts_code", "pct_chg", "pre_close", "amount", "change"], axis=1)
+  data.rename(columns={'trade_date':'Date', 'open':'Open', 'high':'High', 'low':'Low', 'close':'Close', 'vol':'Volume'}, inplace=True)
+  data.set_index(["Date"], inplace=True)
+  data.index = pd.to_datetime(data.index)
+  
+  # 绘制K线图和均线图
+  mpf.plot(data, type='candle', mav=(3,6,9), volume=True)
+  # mpf.candlestick_ochl(ax1,df_arr,width=0.6,colorup='r',colordown='g',alpha=1.0)
+  ax1.plot(df_arr[:,0],data['MA5'])
+  ax1.plot(df_arr[:,0],data['MA10'])
+  
+  ax1.grid()
+  ax1.xaxis_date()
+  ax1.set_title('平安银行',fontsize=16)
+  ax1.set_ylabel('价格',fontsize=16)
+  
+  # 绘制每日成交量图
+  ax2.bar(df_arr[:,0],df_arr[:,5])
+  ax2.set_xlabel('日期',fontsize=16)
+  ax2.set_ylabel('成交量',fontsize=16)
+  ax1.grid()
+
   # with engine.connect() as conn, conn.begin():
     # data=pd.read_sql_table("t_daily", conn)
     # data.to_csv('t_daily.csv')
