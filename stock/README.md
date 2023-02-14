@@ -1,5 +1,9 @@
 # 监控
 
+```
+pip freeze > requirements.txt
+```
+
 ## 安装必备
 
 ```
