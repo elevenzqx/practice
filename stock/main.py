@@ -153,44 +153,44 @@ def read_daily():
     # data.to_csv('t_daily.csv')
 
 # 标题格式，字体为中文字体，颜色为黑色，粗体，水平中心对齐
-title_font = {'fontname': 'Microsoft YaHei',
+title_font = {'fontname': 'Hiragino Sans GB',
               'size':     '16',
               'color':    'black',
               'weight':   'bold',
               'va':       'bottom',
               'ha':       'center'}
 # 红色数字格式（显示开盘收盘价）粗体红色24号字
-large_red_font = {'fontname': 'Microsoft YaHei',
+large_red_font = {'fontname': 'Hiragino Sans GB',
                   'size':     '24',
                   'color':    'red',
                   'weight':   'bold',
                   'va':       'bottom'}
 # 绿色数字格式（显示开盘收盘价）粗体绿色24号字
-large_green_font = {'fontname': 'Microsoft YaHei',
+large_green_font = {'fontname': 'Hiragino Sans GB',
                     'size':     '24',
                     'color':    'green',
                     'weight':   'bold',
                     'va':       'bottom'}
 # 小数字格式（显示其他价格信息）粗体红色12号字
-small_red_font = {'fontname': 'Microsoft YaHei',
+small_red_font = {'fontname': 'Hiragino Sans GB',
                   'size':     '12',
                   'color':    'red',
                   'weight':   'bold',
                   'va':       'bottom'}
 # 小数字格式（显示其他价格信息）粗体绿色12号字
-small_green_font = {'fontname': 'Microsoft YaHei',
+small_green_font = {'fontname': 'Hiragino Sans GB',
                     'size':     '12',
                     'color':    'green',
                     'weight':   'bold',
                     'va':       'bottom'}
 # 标签格式，可以显示中文，普通黑色12号字
-normal_label_font = {'fontname': 'Microsoft YaHei',
+normal_label_font = {'fontname': 'Hiragino Sans GB',
                      'size':     '12',
                      'color':    'black',
                      'va':       'bottom',
                      'ha':       'right'}
 # 普通文本格式，普通黑色12号字
-normal_font = {'fontname': 'Microsoft YaHei',
+normal_font = {'fontname': 'Hiragino Sans GB',
                'size':     '12',
                'color':    'black',
                'va':       'bottom',
@@ -304,7 +304,7 @@ def main():
   #       #  marketcolors=my_color
   #        )
   
-  np.fft.fft()
+  # np.fft.fft()
   
   print('Finished')
   
