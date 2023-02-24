@@ -1,16 +1,41 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python3",
             "type": "python",
             "request": "launch",
+            "stopOnEntry": false,
+            "python": "/usr/local/bin/python3",
             "program": "${file}",
+            "cwd":"${workspaceFolder}",
+            "env": {},
             "console": "integratedTerminal",
-            "justMyCode": true
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Terminal (integrated)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "python": "/usr/local/bin/python3",
+            "program": "${file}",
+            "cwd": "",
+            "console": "integratedTerminal",
+            "env":{},
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "name": "Python: Terminal (external)",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "python": "/usr/local/bin/python3",
+            "program": "${file}",
+            "cwd": "",
+            "console": "externalTerminal",
+            "env": {},
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
