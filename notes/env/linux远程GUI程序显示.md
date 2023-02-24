@@ -62,4 +62,9 @@ apt install x11-apps
 xeyes
 ```
 
+## macos 使用
 
+* 在 [XQuartz](https://www.xquartz.org/) 下载、安装、运行，当前版本是 2016-10-29 的 2.7.11
+* 在 XQuartz 的配置窗口里勾选 「Allow connections from network clients」
+* 添加访问控制白名单 xhost + 127.0.0.1，或禁用访问控制 xhost +
+* 运行容器并通过DISPLAY环境变量指定X11转发地址 docker run -e DISPLAY=host.docker.internal:0 jess/firefox
