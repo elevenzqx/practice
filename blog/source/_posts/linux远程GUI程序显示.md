@@ -1,6 +1,7 @@
 ---
 title: Linux 远程 GUI 显示
 cover: https://cdn.pixabay.com/photo/2023/09/25/10/46/krka-8274679_1280.jpg
+thumbnail: https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&w=1600
 categories: 
 - 环境搭建
 tags:
