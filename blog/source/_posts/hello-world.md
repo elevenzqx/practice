@@ -1,7 +1,16 @@
 ---
 title: Hello World
+cover: https://cdn.pixabay.com/photo/2023/09/22/11/10/lisbon-8268841_1280.jpg
+categories: 
+- 应用
+tags:
+- Hexo
+- markdown
+- js
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+
+<!--more-->
 
 ## Quick Start
 

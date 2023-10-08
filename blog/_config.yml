@@ -1,11 +1,11 @@
-title: Hexo
-subtitle: ''
-description: ''
+title: eleven
+subtitle: 'eleven小新'
+description: '小新之家，这里将记录个人的日常笔记'
 keywords: null
-author: John Doe
+author: eleven
 language: zh-CN
 timezone: ''
-url: http://example.com
+url: http://elevenzqx.github.io
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
 pretty_urls:

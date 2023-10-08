@@ -1,7 +1,11 @@
 ---
 title: Linux 远程 GUI 显示
+cover: https://cdn.pixabay.com/photo/2023/09/25/10/46/krka-8274679_1280.jpg
+categories: 
+- 环境搭建
+tags:
+- linux
 ---
-# Linux 远程 GUI 显示
 
 ## windowns 使用
 
@@ -16,6 +20,8 @@ https://sourceforge.net/projects/vcxsrv/
 * 第二步: 选 start no client
 
 * 第三步: 这一步比较重要，勾选 Disable acccess control
+
+<!--more-->
 
 ### WSL 下使用
 
